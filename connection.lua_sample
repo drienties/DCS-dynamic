@@ -1,3 +1,6 @@
+package.path  = package.path..";"..lfs.currentdir().."/LuaSocket/?.lua"
+package.cpath = package.cpath..";"..lfs.currentdir().."/LuaSocket/?.dll"
+
 --DB connection
 socket = require("socket")
 IPAddress = --yourIP
