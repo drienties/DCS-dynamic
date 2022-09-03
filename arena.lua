@@ -1,6 +1,3 @@
-package.path  = package.path..";"..lfs.currentdir().."/LuaSocket/?.lua"
-package.cpath = package.cpath..";"..lfs.currentdir().."/LuaSocket/?.dll"
-
 --type of Air defence units
 AD_types = {
  'RED SAM',
