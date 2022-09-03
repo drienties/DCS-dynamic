@@ -66,13 +66,6 @@ EventHandler8 = EVENTHANDLER:New():HandleEvent( EVENTS.MarkAdded )
 EventHandler9 = EVENTHANDLER:New():HandleEvent( EVENTS.Crash )
 EventHandler10 = EVENTHANDLER:New():HandleEvent( EVENTS.Takeoff )
 
-
-
---DB connection
-socket = require("socket")
-IPAddress = "149.210.141.63"
-Port = 31090
-
 --check if list has value
 function has_value (tab, val)
     for index, value in ipairs(tab) do

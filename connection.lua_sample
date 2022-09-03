@@ -1,0 +1,4 @@
+--DB connection
+socket = require("socket")
+IPAddress = --yourIP
+Port = 31090
