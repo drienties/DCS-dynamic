@@ -24,8 +24,8 @@ markerPrefixes = {
 
 EWRZones = {
  'Firefly',
-  'Manis',
-  'Pinpoint'
+ 'Mantis',
+ 'Pinpoint'
 }
 
 reconUnits = {}
@@ -36,7 +36,7 @@ GroupMenu = {}
 
 --Sets
 local SetClients = SET_CLIENT:New():FilterCoalitions( "blue" ):FilterActive():FilterStart()
-
+local SetBlueEWR = SET_UNIT:New():FilterCoalitions( "blue" ):FilterCategories("ground"):FilterPrefixes( "BLUE EWR" ):FilterActive():FilterStart()
 local SetCriticalRedUnits = SET_UNIT:New():FilterCoalitions( "red" ):FilterCategories("ground"):FilterPrefixes(critical_units):FilterActive():FilterStart()
 local SetCriticalRedStatics = SET_STATIC:New():FilterCoalitions( "red" ):FilterPrefixes(critical_statics):FilterStart()
 
@@ -48,7 +48,7 @@ local SetBlueUnits = SET_UNIT:New():FilterCoalitions( "blue" ):FilterActive():Fi
 local SetPowerPlants = SET_STATIC:New():FilterCoalitions( "red" ):FilterPrefixes( "Powerplant" ):FilterStart()
 local SetZones = SET_ZONE:New():FilterPrefixes( "capturezone-" ):FilterStart()
 
-mission_id = "ArenaV5"
+mission_id = "ArenaV6"
 sortie_id = os.date("%x")
 
 --handlers
@@ -546,6 +546,8 @@ RED_MANTIS = MANTIS:New("Red_MANTIS","RED SAM","RED EW","MANTIS Command Center",
 RED_MANTIS:SetMaxActiveSAMs(2, 2, 4, 6)
 RED_MANTIS:SetAdvancedMode(true)
 --RED_MANTIS:Debug(true)
+--RED_MANTIS.verbose=true
+RED_MANTIS:SetSAMRange(100)
 RED_MANTIS:Start()
 
 
@@ -625,7 +627,7 @@ function enableRedCap()
 	--Damascus
 	A2ADispatcher:SetSquadron( "Damascus Defenders MIG21", AIRBASE.Syria.Damascus, { "RED - CAP - MIG21" }, Damascus_MIG21_Planes )
 	A2ADispatcher:SetSquadronOverhead( "Damascus Defenders MIG21", 0.5)
-	A2ADispatcher:SetSquadron( "Damascus Defenders SU27", AIRBASE.Syria.Damascus, { "RED - CAP - SU27A" }, Damascus_SU27_Planes )
+	A2ADispatcher:SetSquadron( "Damascus Defenders SU27", AIRBASE.Syria.Damascus, { "RED - CAP - SU27" }, Damascus_SU27_Planes )
 	A2ADispatcher:SetSquadronOverhead( "Damascus Defenders SU27", 0.5)
 
 	A2ADispatcher:SetSquadronGci( "Damascus Defenders MIG21", 900, 1200 )
@@ -634,7 +636,7 @@ function enableRedCap()
 	--Aleppo
 	A2ADispatcher:SetSquadron( "Aleppo Defenders MIG21", AIRBASE.Syria.Aleppo, { "RED - CAP - MIG21" }, Aleppo_MIG21_Planes )
 	A2ADispatcher:SetSquadronOverhead( "Aleppo Defenders MIG21", 0.5)
-	A2ADispatcher:SetSquadron( "Aleppo Defenders SU27", AIRBASE.Syria.Aleppo, { "RED - CAP - SU27A" }, Aleppo_SU27_Planes )
+	A2ADispatcher:SetSquadron( "Aleppo Defenders SU27", AIRBASE.Syria.Aleppo, { "RED - CAP - SU27" }, Aleppo_SU27_Planes )
 	A2ADispatcher:SetSquadronOverhead( "Aleppo Defenders SU27", 0.5)
 
 	A2ADispatcher:SetSquadronGci( "Aleppo Defenders MIG21", 900, 1200 )
@@ -643,7 +645,7 @@ function enableRedCap()
 	--Bassel al assad
 	A2ADispatcher:SetSquadron( "Bassel Al Assad Defenders MIG21", AIRBASE.Syria.Bassel_Al_Assad, { "RED - CAP - MIG21" }, Bassel_MIG21_Planes )
 	A2ADispatcher:SetSquadronOverhead( "Bassel Al Assad Defenders MIG21", 1)
-	A2ADispatcher:SetSquadron( "Bassel Al Assad Defenders SU27", AIRBASE.Syria.Bassel_Al_Assad, { "RED - CAP - SU27A" }, Bassel_SU27_Planes )
+	A2ADispatcher:SetSquadron( "Bassel Al Assad Defenders SU27", AIRBASE.Syria.Bassel_Al_Assad, { "RED - CAP - SU27" }, Bassel_SU27_Planes )
 	A2ADispatcher:SetSquadronOverhead( "Bassel Al Assad Defenders SU27", 1)
 
 	A2ADispatcher:SetSquadronGci( "Bassel Al Assad Defenders MIG21", 900, 1200 )
@@ -659,7 +661,7 @@ function enableRedCap()
 	A2ADispatcher:SetSquadronGci( "Incirlik Defenders MIG23", 900, 1200 )
 	
 	--Akrotiri
-	A2ADispatcher:SetSquadron( "Akrotiri Defenders SU27", AIRBASE.Syria.Akrotiri, { "RED - CAP - SU27A" }, Akrotiri_SU27_Planes )
+	A2ADispatcher:SetSquadron( "Akrotiri Defenders SU27", AIRBASE.Syria.Akrotiri, { "RED - CAP - SU27" }, Akrotiri_SU27_Planes )
 	A2ADispatcher:SetSquadronOverhead( "Akrotiri Defenders SU27", 1)
 	A2ADispatcher:SetSquadron( "Akrotiri Defenders MIG21", AIRBASE.Syria.Akrotiri, { "RED - CAP - MIG21" }, Akrotiri_MIG21_Planes )
 	A2ADispatcher:SetSquadronOverhead( "Akrotiri Defenders MIG21", 1)
@@ -668,19 +670,19 @@ function enableRedCap()
 	A2ADispatcher:SetSquadronGci( "Akrotiri Defenders MIG21", 900, 1200 )
 	
 	--Abu Al-Duhur
-	A2ADispatcher:SetSquadron( "Abu Al-Duhur Defenders SU27", AIRBASE.Syria.Abu_al_Duhur, { "RED - CAP - SU27A" }, Abu_al_Duhur_SU27_Planes )
+	A2ADispatcher:SetSquadron( "Abu Al-Duhur Defenders SU27", AIRBASE.Syria.Abu_al_Duhur, { "RED - CAP - SU27" }, Abu_al_Duhur_SU27_Planes )
 	A2ADispatcher:SetSquadronOverhead( "Abu Al-Duhur Defenders SU27", 1)
 
 	A2ADispatcher:SetSquadronGci( "Abu Al-Duhur Defenders SU27", 900, 1200 )
 	
 	--Ramat
-	A2ADispatcher:SetSquadron( "Ramat Defenders SU27", AIRBASE.Syria.Ramat_David, { "RED - CAP - SU27A" }, Ramat_SU27_Planes )
+	A2ADispatcher:SetSquadron( "Ramat Defenders SU27", AIRBASE.Syria.Ramat_David, { "RED - CAP - SU27" }, Ramat_SU27_Planes )
 	A2ADispatcher:SetSquadronOverhead( "Ramat Defenders SU27", 1)
 
 	A2ADispatcher:SetSquadronGci( "Ramat Defenders SU27", 900, 1200 )
 	
 	--Beirut
-	A2ADispatcher:SetSquadron( "Beirut Defenders SU27", AIRBASE.Syria.Beirut_Rafic_Hariri, { "RED - CAP - SU27A" }, Beirut_SU27_Planes )
+	A2ADispatcher:SetSquadron( "Beirut Defenders SU27", AIRBASE.Syria.Beirut_Rafic_Hariri, { "RED - CAP - SU27" }, Beirut_SU27_Planes )
 	A2ADispatcher:SetSquadronOverhead( "Beirut Defenders SU27", 1)
 
 	A2ADispatcher:SetSquadronGci( "Beirut Defenders SU27", 900, 1200 )
@@ -706,6 +708,10 @@ function enableRedCap()
 	CAPZoneWest = ZONE:New( "CAP_WEST")
 	A2ADispatcher:SetSquadronCap( "Akrotiri Defenders SU27", CAPZoneWest, 4000, 8000, 300, 800, 800, 1200, "BARO" )
 	A2ADispatcher:SetSquadronCapInterval( "Akrotiri Defenders SU27", 2, 180, 600, 1 )
+
+	CAPZoneNorth_West = ZONE:New( "CAP_NORTH-WEST")
+	A2ADispatcher:SetSquadronCap( "Incirlik Defenders MIG23", CAPZoneNorth_West, 4000, 8000, 300, 800, 800, 1200, "BARO" )
+	A2ADispatcher:SetSquadronCapInterval( "Incirlik Defenders MIG23", 2, 180, 600, 1 )
 
 	--default CAPGCI Settings
 
@@ -906,15 +912,23 @@ function LoadEWR(Client)
 	end
 end
 
-
-function SpawnEWR(Client)
-	--check if in EWRZones
-
-	local SpawnUnit = SPAWN:NewWithAlias( "BLUE EWR", math.random(99999999999))
+function SpawnEWR(Client, EWRZone)
+	local who = Client:GetName()
+	local MessageAll = MESSAGE:New("Deploying EWR "..EWRZone,  10):ToAll()
+	local SpawnUnit = SPAWN:NewWithAlias( "BLUE EWR", "BLUE EWR - "..math.random(99999999999))
 	local coord = Client:GetCoordinate()
 	local heading = Client:GetHeading()
 	local newCoord = coord:Translate(25, heading, false, false)
 	local EWR = SpawnUnit:SpawnFromVec2( newCoord:GetVec2() )
+	
+	--cleanup cargolist
+	for k, v in pairs(cargoList) do
+		env.info("current unit to check for cleanup: ".. k)
+		if k == who then
+			env.info(who.. " matches, removing")
+			cargoList[k] = nil
+		end
+	end
 end
 
 function UnloadEWR(Client)
@@ -923,17 +937,40 @@ function UnloadEWR(Client)
 	
 	if tableHasKey(cargoList, who) == true then
 		--has cargo on board, not checking what assuming EWR (lazy hack)
-		local MessageAll = MESSAGE:New("Deploying EWR",  10):ToAll()
-		SpawnEWR(Client)
 		
-		--cleanup cargolist
-		for k, v in pairs(cargoList) do
-			env.info("current unit to check for cleanup: ".. k)
-			if k == who then
-				env.info(who.. " matches, removing")
-				cargoList[k] = nil
+		for k, v in pairs(EWRZones) do
+			--ff
+			if ZONE:FindByName(v) ~= nil then
+				--existing zone check
+				local EWRzone = ZONE:FindByName(v)
+				env.info("checking zone: "..v)
+
+				if Client:IsInZone(EWRzone) then
+					--check if current Client is in zone
+					env.info("Client is in EWR deployment zone")
+					
+					if SetBlueEWR:CountAlive() == 0 then
+						--no EWR's deployed yet, no need to check which zone we are in
+						env.info("EWRSet empty, spawning")
+						SpawnEWR(Client, v)
+					else
+						--EWR Set is not emtpy, need to check zones
+						SetBlueEWR:ForEachUnit( function( unit )
+							--check Active EWR's
+							if unit:IsInZone(EWRzone) == true then
+								--check if active EWR is in current Zone
+							else
+								--check if active EWR is in current Zone
+								env.info("EWR Set not empty, this zone has no EWR. spawning EWR")
+								SpawnEWR(Client, v)
+							end
+						end )
+					end
+				else
+					--not in EWR deployment zone
+				end
 			end
-		end
+		end		
 	else
 		local MessageAll = MESSAGE:New("No EWR on board",  10):ToAll()
 	end
